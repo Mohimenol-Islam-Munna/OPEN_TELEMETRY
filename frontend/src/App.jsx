@@ -6,7 +6,8 @@ function App() {
 
   return (
    <div style={{border: "2px solid blueviolet"}}>
-    <h2>OpenTelemetry in React Js</h2>
+    <h2>OpenTelemetry in React Js.</h2>
+    <h3>subtitle</h3>
    </div>
   )
 }

@@ -11,7 +11,7 @@ import { FetchInstrumentation } from "@opentelemetry/instrumentation-fetch";
 
 const provider = new WebTracerProvider({
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: process.env.REACT_APP_NAME,
+    [SemanticResourceAttributes.SERVICE_NAME]: "OPENTELEMETRY WITH REACT",
   }),
 });
 
@@ -37,5 +37,5 @@ registerInstrumentations({
 });
 
 export default function TraceProvider({ children }) {
-  return <>{children}</>;
+  return children;
 }
