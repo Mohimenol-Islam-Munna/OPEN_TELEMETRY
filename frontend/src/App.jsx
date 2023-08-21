@@ -22,8 +22,6 @@ function App() {
     error: null,
   });
 
-  console.log("user :::", user);
-
   const fetchUserHandler = async (id) => {
     setUser((prev) => {
       return {
