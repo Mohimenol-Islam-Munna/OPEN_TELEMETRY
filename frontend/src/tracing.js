@@ -8,10 +8,12 @@ import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions"
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { FetchInstrumentation } from "@opentelemetry/instrumentation-fetch";
+import { ZoneContextManager } from "@opentelemetry/context-zone";
+import { getWebAutoInstrumentations } from "@opentelemetry/auto-instrumentations-web";
 
 const provider = new WebTracerProvider({
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: "OPENTELEMETRY WITH REACT",
+    [SemanticResourceAttributes.SERVICE_NAME]: "OPENTELEMETRY-WITH-REACT",
   }),
 });
 
@@ -29,11 +31,16 @@ provider.addSpanProcessor(new SimpleSpanProcessor(consoleExporter));
 
 provider.addSpanProcessor(new SimpleSpanProcessor(collectorExporter));
 
-provider.register();
+provider.register({
+  contextManager: new ZoneContextManager(),
+});
 
 registerInstrumentations({
-  instrumentations: [fetchInstrumentation],
-  tracerProvider: provider,
+  instrumentations: [
+    getWebAutoInstrumentations({
+      "@opentelemetry/instrumentation-fetch": {},
+    }),
+  ],
 });
 
 export default function TraceProvider({ children }) {

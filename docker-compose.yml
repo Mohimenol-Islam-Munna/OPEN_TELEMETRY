@@ -2,19 +2,15 @@ version: "2"
 
 services:
   frontend:
-    build: 
+    build:
       context: ./frontend
-    #   dockerfile: ./frontend/Dockerfile
-    # image: update-frontend
     depends_on:
       - backend
     ports:
-      - "9000:9000"
-    env_file: 
-      - ./frontend/.env
+      - "3000:3000"
 
   backend:
-    build: 
+    build:
       context: ./backend
     ports:
       - "5000:5000"
