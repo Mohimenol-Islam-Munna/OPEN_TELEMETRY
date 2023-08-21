@@ -1,2 +1,0 @@
-killall otelcol
-killall node

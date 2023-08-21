@@ -4,6 +4,8 @@ services:
   frontend:
     build: 
       context: ./frontend
+    #   dockerfile: ./frontend/Dockerfile
+    # image: update-frontend
     depends_on:
       - backend
     ports:

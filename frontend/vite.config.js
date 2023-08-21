@@ -11,4 +11,7 @@ export default defineConfig({
     strictPort: true,
     port: 9000,
   },
+  preview: {
+    port: 9000,
+  },
 });
