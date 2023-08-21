@@ -2,6 +2,7 @@ import {
   WebTracerProvider,
   SimpleSpanProcessor,
   ConsoleSpanExporter,
+  BatchSpanProcessor,
 } from "@opentelemetry/sdk-trace-web";
 import { Resource } from "@opentelemetry/resources";
 import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions";
@@ -20,6 +21,7 @@ const provider = new WebTracerProvider({
 const consoleExporter = new ConsoleSpanExporter();
 
 const collectorExporter = new OTLPTraceExporter({
+  // url: "http://localhost:4318/v1/traces",
   headers: {},
 });
 
@@ -28,8 +30,7 @@ const fetchInstrumentation = new FetchInstrumentation({});
 fetchInstrumentation.setTracerProvider(provider);
 
 provider.addSpanProcessor(new SimpleSpanProcessor(consoleExporter));
-
-provider.addSpanProcessor(new SimpleSpanProcessor(collectorExporter));
+provider.addSpanProcessor(new BatchSpanProcessor(collectorExporter));
 
 provider.register({
   contextManager: new ZoneContextManager(),
