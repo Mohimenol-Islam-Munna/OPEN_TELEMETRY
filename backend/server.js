@@ -1,3 +1,5 @@
+const TracerProvider = require("./tracing.js");
+TracerProvider();
 const express = require("express");
 const cors = require("cors");
 
@@ -6,7 +8,7 @@ const port = 5000;
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.json({ status: 200, message: "Data From Our Express Backend" });
+  res.json({ status: 200, message: "Data From Our Express Backend..." });
 });
 
 app.listen(port, () => {

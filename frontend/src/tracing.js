@@ -36,12 +36,14 @@ provider.register({
   contextManager: new ZoneContextManager(),
 });
 
+// instrumentation
 registerInstrumentations({
   instrumentations: [
     getWebAutoInstrumentations({
       "@opentelemetry/instrumentation-fetch": {},
     }),
   ],
+  tracerProvider: provider,
 });
 
 export default function TraceProvider({ children }) {
